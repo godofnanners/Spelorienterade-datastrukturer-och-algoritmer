@@ -9,6 +9,7 @@ class HitBox
 public:
 	HitBox();
 	void Init(Tga2D::CSprite* aSprite);
+	void Init(const Tga2D::Vector2f& aDim, const Tga2D::Vector2f& aPos);
 	const Tga2D::Vector2f GetPos();
 	const float GetWidth();
 	const float GetHeight();

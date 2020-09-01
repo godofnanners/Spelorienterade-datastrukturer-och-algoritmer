@@ -3,6 +3,7 @@
 #include <tga2d/sprite/sprite.h>
 #include "InputHandler/InputHandler.h"
 #include "Grid.h"
+#include "AStar.hpp"
 #include "Random/Random.hpp"
 #include "InputHandler/InputKeys.h"
 #include <iostream>
@@ -62,7 +63,14 @@ void CGameWorld::Update(float /*aTimeDelta*/)
 
 	if (CommonUtilities::InputHandler::Instance().CheckIfMouseButtonIsPressed(static_cast<int>(InputKeys::eMouseButtons::eLBUTTON)) && myStart != -1 && myEnd != -1)
 	{
-		
+		std::vector<int> path = CommonUtilities::AStar(myGrid->ConvertToDijsktraVector(), myStart, myEnd,CommonUtilities::eHeuristics::eEuclidian);
+		std::cout << std::endl;
+		for (size_t i = 0; i < path.size(); i++)
+		{
+			std::cout << path[i] << std::endl;
+		}
+		myGrid->ColorPath(path);
+		ResetStartnEnd();
 	}
 
 	if (CommonUtilities::InputHandler::Instance().CheckIfMouseButtonIsPressed(static_cast<int>(InputKeys::eMouseButtons::eRBUTTON)))

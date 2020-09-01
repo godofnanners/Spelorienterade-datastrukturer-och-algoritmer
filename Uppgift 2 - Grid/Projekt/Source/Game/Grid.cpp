@@ -18,7 +18,22 @@ void Grid::Init()
 	}
 }
 
-
+std::vector<CommonUtilities::Tile> Grid::ConvertToDijsktraVector()
+{
+	std::vector<CommonUtilities::Tile>map;
+	for (size_t i = 0; i < myTiles.size(); i++)
+	{
+		if (myTiles[i].myPassable == true)
+		{
+			map.insert(map.end(), CommonUtilities::Tile::Passable);
+		}
+		else
+		{
+			map.insert(map.end(), CommonUtilities::Tile::Impassable);
+		}
+	}
+	return map;
+}
 
 int Grid::TileOnMousePosLeftClick(bool& aFoundTile, const Tga2D::CColor& aColor)
 {

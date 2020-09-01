@@ -18,6 +18,13 @@ void HitBox::Init(Tga2D::CSprite* aSprite)
 	myPivot = aSprite->GetPivot();
 }
 
+void HitBox::Init(const Tga2D::Vector2f& aDim,const Tga2D::Vector2f& aPos)
+{
+	myWidth = aDim.x / Tga2D::CEngine::GetInstance()->GetWindowRatio();
+	myHeight = aDim.y;
+	myCenterPosition = aPos;
+}
+
 const Tga2D::Vector2f HitBox::GetPos()
 {
 	return myCenterPosition;
