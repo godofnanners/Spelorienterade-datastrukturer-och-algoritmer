@@ -3,7 +3,10 @@
 
 #include <string>
 #include "HitBox.h"
-class Tile
+#include "Rect.h"
+#include "GrowingArray/GrowingArray.h"
+class Object;
+class Tile : Rect
 {
 public:
 	Tga2D::CSprite mySprite;
@@ -18,6 +21,7 @@ public:
 	bool CheckIfTileIsInsideLeftclick(int& aIndex, const Tga2D::CColor& aColor);
 	void Render();
 private:
+	CommonUtilities::GrowingArray<Object*> myContainedObjects;
 	Tga2D::CColor myColor;
 	int myIndex;
 };

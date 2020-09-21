@@ -19,9 +19,9 @@
     </ClInclude>
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Tile.h" />
-    <ClInclude Include="MinHeap.hpp" />
     <ClInclude Include="HitBox.h" />
-    <ClInclude Include="AStar.hpp" />
+    <ClInclude Include="Object.h" />
+    <ClInclude Include="Rect.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -32,5 +32,7 @@
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="HitBox.cpp" />
+    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Rect.cpp" />
   </ItemGroup>
 </Project>
