@@ -5,16 +5,13 @@
 #include <array>
 #include <iostream>
 
-void Tile::Init(Tga2D::Vector2f aPosition, const std::string& aPath,const int aIndex)
+void Tile::Init(Tga2D::Vector2f aPosition,const int aIndex)
 {
 	myIndex = aIndex;
-	mySprite = Tga2D::CSprite(aPath.c_str());
 	mySprite.SetSizeRelativeToScreen({0.05f,0.05f});
-	myPosition.x = aPosition.x*mySprite.GetSize().x/1.75f;
-	myPosition.y = aPosition.y * mySprite.GetSize().y;
 	mySprite.SetPosition(myPosition);
 	myPassable = true;
-	myHitbox.Init(&mySprite);
+	myHitbox.Init({40,40},aPosition);
 }
 
 void Tile::ChangeColor(Tga2D::CColor aColor)
@@ -24,6 +21,11 @@ void Tile::ChangeColor(Tga2D::CColor aColor)
 int Tile::GetIndex()
 {
 	return myIndex;
+}
+
+void Tile::AddObject(Object* aObject)
+{
+	myContainedObjects.Add(aObject);
 }
 
 bool Tile::CheckIfTileIsInsideLeftclick(int &aIndex,const Tga2D::CColor& aColor)

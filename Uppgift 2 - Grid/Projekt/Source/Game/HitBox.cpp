@@ -20,9 +20,10 @@ void HitBox::Init(Tga2D::CSprite* aSprite)
 
 void HitBox::Init(const Tga2D::Vector2f& aDim,const Tga2D::Vector2f& aPos)
 {
-	myWidth = aDim.x / Tga2D::CEngine::GetInstance()->GetWindowRatio();
-	myHeight = aDim.y;
-	myCenterPosition = aPos;
+	myWidth = aDim.x / Tga2D::CEngine::GetInstance()->GetWindowSize().myX;
+	myHeight = aDim.y/ Tga2D::CEngine::GetInstance()->GetWindowSize().myY;
+	myCenterPosition.x = aPos.x / Tga2D::CEngine::GetInstance()->GetWindowSize().x;
+	myCenterPosition.y = aPos.y / Tga2D::CEngine::GetInstance()->GetWindowSize().y;
 }
 
 const Tga2D::Vector2f HitBox::GetPos()

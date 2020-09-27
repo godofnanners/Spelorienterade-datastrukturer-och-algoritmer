@@ -15,7 +15,7 @@ void Grid::Init()
 		{
 			posX = 0;
 		}
-		myTiles[i].Init(Tga2D::Vector2f(posX, posY), "sprites/tga_logo.dds", i);
+		myTiles[i].Init(Tga2D::Vector2f(posX * 40, posY * 40), i);
 		posX++;
 	}
 }
@@ -68,11 +68,19 @@ void Grid::ResetColors()
 	}
 }
 
+void Grid::FindAnInsertObjectInTile(Object* aObject, Tga2D::Vector2f myPos)
+{
+	unsigned int tileColumn = (myPos.x * 0.025f);
+	unsigned int tileRow = (myPos.y * 0.025f);
+
+	unsigned int tileIndex = tileColumn + tileRow * 20;
+}
+
 bool Grid::CheckColisionAABB(const Rect& aRect1, const Rect& aRect2)
 {
-	
+
 	const CommonUtilities::Vector2<float>& pos1 = aRect1.GetPos();
-	const CommonUtilities::Vector2<float>& dim1= aRect1.GetDimensions();
+	const CommonUtilities::Vector2<float>& dim1 = aRect1.GetDimensions();
 
 	const CommonUtilities::Vector2<float>& pos2 = aRect2.GetPos();
 	const CommonUtilities::Vector2<float>& dim2 = aRect2.GetDimensions();
