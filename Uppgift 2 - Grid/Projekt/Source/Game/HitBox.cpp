@@ -7,14 +7,14 @@ HitBox::HitBox()
 {
 	myWidth = 0;
 	myHeight = 0;
-	myCenterPosition = { 0,0 };
+	myPos = { 0,0 };
 }
 
 void HitBox::Init(Tga2D::CSprite* aSprite)
 {
 	myWidth = aSprite->GetSize().x/Tga2D::CEngine::GetInstance()->GetWindowRatio();
 	myHeight = aSprite->GetSize().y;
-	myCenterPosition = aSprite->GetPosition();
+	myPos = aSprite->GetPosition();
 	myPivot = aSprite->GetPivot();
 }
 
@@ -22,13 +22,13 @@ void HitBox::Init(const Tga2D::Vector2f& aDim,const Tga2D::Vector2f& aPos)
 {
 	myWidth = aDim.x / Tga2D::CEngine::GetInstance()->GetWindowSize().myX;
 	myHeight = aDim.y/ Tga2D::CEngine::GetInstance()->GetWindowSize().myY;
-	myCenterPosition.x = aPos.x / Tga2D::CEngine::GetInstance()->GetWindowSize().x;
-	myCenterPosition.y = aPos.y / Tga2D::CEngine::GetInstance()->GetWindowSize().y;
+	myPos.x = aPos.x / Tga2D::CEngine::GetInstance()->GetWindowSize().x;
+	myPos.y = aPos.y / Tga2D::CEngine::GetInstance()->GetWindowSize().y;
 }
 
 const Tga2D::Vector2f HitBox::GetPos()
 {
-	return myCenterPosition;
+	return myPos;
 }
 
 const float HitBox::GetWidth()
@@ -43,24 +43,24 @@ const float HitBox::GetHeight()
 
 void HitBox::Update(Tga2D::Vector2f aPosition)
 {
-	myCenterPosition = aPosition;
+	myPos = aPosition;
 	//DrawHitbox();
 }
 
 void HitBox::DrawHitbox(Tga2D::CColor aColor) const
 {
-	Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine(Tga2D::Vector2f(myCenterPosition.x + myWidth, myCenterPosition.y + myHeight), Tga2D::Vector2f(myCenterPosition.x + myWidth, myCenterPosition.y), aColor);
-	Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine(Tga2D::Vector2f(myCenterPosition.x, myCenterPosition.y + myHeight), myCenterPosition, aColor);
-	Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine(Tga2D::Vector2f(myCenterPosition.x + myWidth, myCenterPosition.y), myCenterPosition, aColor);
-	Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine(Tga2D::Vector2f(myCenterPosition.x, myCenterPosition.y + myHeight), Tga2D::Vector2f(myCenterPosition.x + myWidth, myCenterPosition.y + myHeight), aColor);
+	Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine(Tga2D::Vector2f(myPos.x + myWidth, myPos.y + myHeight), Tga2D::Vector2f(myPos.x + myWidth, myPos.y), aColor);
+	Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine(Tga2D::Vector2f(myPos.x, myPos.y + myHeight), myPos, aColor);
+	Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine(Tga2D::Vector2f(myPos.x + myWidth, myPos.y), myPos, aColor);
+	Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine(Tga2D::Vector2f(myPos.x, myPos.y + myHeight), Tga2D::Vector2f(myPos.x + myWidth, myPos.y + myHeight), aColor);
 }
 
 bool HitBox::CheckCollision(HitBox aHitbox) const
 {
-	if (myCenterPosition.x<aHitbox.GetPos().x+(aHitbox.GetWidth()) &&
-		myCenterPosition.x + myWidth > aHitbox.GetPos().x &&
-		myCenterPosition.y < aHitbox.GetPos().y + (aHitbox.GetHeight()) &&
-		myCenterPosition.y + (myHeight) > aHitbox.GetPos().y)
+	if (myPos.x<aHitbox.GetPos().x+(aHitbox.GetWidth()) &&
+		myPos.x + myWidth > aHitbox.GetPos().x &&
+		myPos.y < aHitbox.GetPos().y + (aHitbox.GetHeight()) &&
+		myPos.y + (myHeight) > aHitbox.GetPos().y)
 	{
        		return true;
 	}
@@ -69,7 +69,7 @@ bool HitBox::CheckCollision(HitBox aHitbox) const
 
 bool HitBox::CheckifPointIsInside(Tga2D::Vector2f aPoint) const
 {
-	if (aPoint.x > myCenterPosition.x  && aPoint.x < myCenterPosition.x+myWidth && aPoint.y > myCenterPosition.y && aPoint.y < myCenterPosition.y+myHeight)
+	if (aPoint.x > myPos.x  && aPoint.x < myPos.x+myWidth && aPoint.y > myPos.y && aPoint.y < myPos.y+myHeight)
 	{
 		return true;
 	}

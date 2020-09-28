@@ -1,10 +1,10 @@
 #pragma once
-
+#include "Rect.h"
 namespace Tga2D
 {
 	class CSprite;
 }
-class HitBox
+class HitBox:Rect
 {
 public:
 	HitBox();
@@ -18,10 +18,6 @@ public:
 	bool CheckCollision(HitBox aHitbox) const;
 	bool CheckifPointIsInside(Tga2D::Vector2f aPoint) const;
 private:
-	Tga2D::Vector2f myCenterPosition;
-	Tga2D::Vector2f myPivot;
-	float myWidth;
-	float myHeight;
-	
+	Tga2D::Vector2f myPivot;	
 };
 

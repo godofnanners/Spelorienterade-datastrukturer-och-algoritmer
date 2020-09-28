@@ -3,7 +3,7 @@
 #include <iostream>
 #include "Rect.h"
 #include "Vector/Vector2.h"
-#include "HitBox.h"
+#include "Rect.h"
 
 void Grid::Init()
 {
@@ -79,9 +79,10 @@ void Grid::FindAnInsertObjectInTile(Object* aObject, Tga2D::Vector2f myPos)
 	myTiles[tileIndex].AddObject(aObject);
 }
 
-CommonUtilities::GrowingArray<Object*> Grid::GetObjectsInAABB(const HitBox& aHitbox)
+CommonUtilities::GrowingArray<Object*> Grid::GetObjectsInAABB(const Rect& aRect)
 {
-	aHitbox.
+
+	unsigned int topLeftIndex= aRect.GetTopLeft().x
 }
 
 bool Grid::CheckColisionAABB(const Rect& aRect1, const Rect& aRect2)
@@ -92,7 +93,6 @@ bool Grid::CheckColisionAABB(const Rect& aRect1, const Rect& aRect2)
 
 	const CommonUtilities::Vector2<float>& pos2 = aRect2.GetPos();
 	const CommonUtilities::Vector2<float>& dim2 = aRect2.GetDimensions();
-
 
 	return (pos1.x < pos2.x + dim2.x &&
 		pos1.x + dim1.x > pos2.x &&
