@@ -47,7 +47,7 @@ void HitBox::Update(Tga2D::Vector2f aPosition)
 	//DrawHitbox();
 }
 
-void HitBox::DrawHitbox(Tga2D::CColor aColor)
+void HitBox::DrawHitbox(Tga2D::CColor aColor) const
 {
 	Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine(Tga2D::Vector2f(myCenterPosition.x + myWidth, myCenterPosition.y + myHeight), Tga2D::Vector2f(myCenterPosition.x + myWidth, myCenterPosition.y), aColor);
 	Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine(Tga2D::Vector2f(myCenterPosition.x, myCenterPosition.y + myHeight), myCenterPosition, aColor);
@@ -55,7 +55,7 @@ void HitBox::DrawHitbox(Tga2D::CColor aColor)
 	Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine(Tga2D::Vector2f(myCenterPosition.x, myCenterPosition.y + myHeight), Tga2D::Vector2f(myCenterPosition.x + myWidth, myCenterPosition.y + myHeight), aColor);
 }
 
-bool HitBox::CheckCollision(HitBox aHitbox)
+bool HitBox::CheckCollision(HitBox aHitbox) const
 {
 	if (myCenterPosition.x<aHitbox.GetPos().x+(aHitbox.GetWidth()) &&
 		myCenterPosition.x + myWidth > aHitbox.GetPos().x &&
@@ -67,7 +67,7 @@ bool HitBox::CheckCollision(HitBox aHitbox)
 	return false;
 }
 
-bool HitBox::CheckifPointIsInside(Tga2D::Vector2f aPoint)
+bool HitBox::CheckifPointIsInside(Tga2D::Vector2f aPoint) const
 {
 	if (aPoint.x > myCenterPosition.x  && aPoint.x < myCenterPosition.x+myWidth && aPoint.y > myCenterPosition.y && aPoint.y < myCenterPosition.y+myHeight)
 	{

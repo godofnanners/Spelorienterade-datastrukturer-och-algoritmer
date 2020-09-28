@@ -21,6 +21,8 @@ CGameWorld::~CGameWorld()
 
 void CGameWorld::Init()
 {
+	
+
 	myGrid = new Grid();
 	myGrid->Init();
 	myStart = -1;
