@@ -1,6 +1,12 @@
 #include "stdafx.h"
 #include "Rect.h"
 
+Rect::Rect()
+{
+
+}
+
+
 Rect::~Rect()
 {
 }
@@ -15,22 +21,22 @@ const Tga2D::Vector2<float>& Rect::GetDimensions() const
 	return Tga2D::Vector2<float>(myWidth,myHeight);
 }
 
-const Tga2D::Vector2<float>& Rect::GetTopLeft() const
+const Tga2D::Vector2<float> Rect::GetTopLeft() const
 {
 	return Tga2D::Vector2<float>(myPos.y - myHeight * 0.5f, myPos.x - myWidth * 0.5f);
 }
 
-const Tga2D::Vector2<float>& Rect::GetTopRight() const
+const Tga2D::Vector2<float> Rect::GetTopRight() const
 {
 	return Tga2D::Vector2<float>(myPos.y - myHeight * 0.5f, myPos.x + myWidth * 0.5f);
 }
 
-const Tga2D::Vector2<float>& Rect::GetBottomLeft() const
+const Tga2D::Vector2<float> Rect::GetBottomLeft() const
 {
 	return Tga2D::Vector2<float>(myPos.y + myHeight * 0.5f, myPos.x - myWidth * 0.5f);
 }
 
-const Tga2D::Vector2<float>& Rect::GetBottomRight() const
+const Tga2D::Vector2<float> Rect::GetBottomRight() const
 {
 	return Tga2D::Vector2<float>(myPos.y + myHeight * 0.5f, myPos.x + myWidth * 0.5f);
 }

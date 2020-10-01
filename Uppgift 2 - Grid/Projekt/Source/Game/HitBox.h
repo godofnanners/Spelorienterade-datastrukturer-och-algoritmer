@@ -4,7 +4,7 @@ namespace Tga2D
 {
 	class CSprite;
 }
-class HitBox:Rect
+class HitBox :public Rect
 {
 public:
 	HitBox();
@@ -18,6 +18,6 @@ public:
 	bool CheckCollision(HitBox aHitbox) const;
 	bool CheckifPointIsInside(Tga2D::Vector2f aPoint) const;
 private:
-	Tga2D::Vector2f myPivot;	
+	Tga2D::Vector2f myPivot;
 };
 

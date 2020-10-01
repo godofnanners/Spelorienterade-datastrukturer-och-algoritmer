@@ -11,6 +11,11 @@ void Object::Init(const Tga2D::Vector2f& aPos, const Tga2D::Vector2f& aDim)
 	mySprite->SetSizeRelativeToScreen({ 40.f / Tga2D::CEngine::GetInstance()->GetWindowSize().myX* Tga2D::CEngine::GetInstance()->GetWindowRatio(), 40.f / Tga2D::CEngine::GetInstance()->GetWindowSize().myY });
 }
 
+void Object::SetAlpha(float aAlpha)
+{
+	mySprite->SetColor({ 1,1,1,aAlpha });
+}
+
 void Object::Render()
 {
 	mySprite->Render();

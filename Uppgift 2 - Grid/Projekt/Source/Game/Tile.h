@@ -7,7 +7,7 @@
 #include "GrowingArray/GrowingArray.h"
 #include "VectorOnStack/VectorOnStack.h"
 class Object;
-class Tile : Rect
+class Tile : public Rect
 {
 public:
 	Tga2D::CSprite mySprite;

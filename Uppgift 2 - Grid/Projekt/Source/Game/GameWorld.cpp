@@ -32,6 +32,7 @@ void CGameWorld::Init()
 		Tga2D::Vector2f position = Tga2D::Vector2f(CommonUtilities::GetRandomFloat(0, gridSize), CommonUtilities::GetRandomFloat(0, gridSize));
 		Object* object = new Object();
 		object->Init(position, Tga2D::Vector2f(40, 40));
+		object->SetAlpha(0.5f);
 		myObjects.Add(object);
 		myGrid->FindAnInsertObjectInTile(object, position);
 	}
@@ -41,6 +42,14 @@ void CGameWorld::Init()
 	myTga2dLogoSprite->SetSizeRelativeToScreen({ 0.2,0.2 });*/
 	myVisualZone = new VisualZone();
 	myVisualZone->Init({ 40 * 10,40 * 10 }, { 40,40 });
+
+	CommonUtilities::GrowingArray<Object*> myInZoneObjects = myGrid->GetObjectsInAABB(myVisualZone->GetHitbox());
+
+	for (size_t i = 0; i < myInZoneObjects.Size(); i++)
+	{
+		myInZoneObjects[i]->SetAlpha(1);
+	}
+
 	CommonUtilities::InputHandler::Instance().CheckMousePos();
 
 }

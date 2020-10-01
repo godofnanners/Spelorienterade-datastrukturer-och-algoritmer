@@ -11,7 +11,8 @@ class VisualZone
 public:
 	VisualZone();
 	void Init(const Tga2D::Vector2f& aPos, const Tga2D::Vector2f& aDim);
-	Tga2D::Vector2f GetPos();
+	const Tga2D::Vector2f& GetPos();
+	const HitBox& GetHitbox();
 	void Render();
 private:
 	Tga2D::Vector2f myPosition;
