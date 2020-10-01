@@ -8,6 +8,7 @@ namespace Tga2D
 }
 class Object;
 class Grid;
+class VisualZone;
 class CGameWorld
 {
 public:
@@ -23,6 +24,7 @@ private:
 	Tga2D::CSprite* myTga2dLogoSprite;
 	Grid* myGrid;
 	CommonUtilities::VectorOnStack<Object*,20>myObjects;
+	VisualZone* myVisualZone;
 	int myStart;
 	int myEnd;
 };

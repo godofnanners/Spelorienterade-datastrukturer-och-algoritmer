@@ -7,6 +7,7 @@
 #include "InputHandler/InputKeys.h"
 #include <iostream>
 #include "Object.h"
+#include "VisualZone.h"
 CGameWorld::CGameWorld()
 {
 	myTga2dLogoSprite = nullptr;
@@ -21,8 +22,6 @@ CGameWorld::~CGameWorld()
 
 void CGameWorld::Init()
 {
-	
-
 	myGrid = new Grid();
 	myGrid->Init();
 	myStart = -1;
@@ -32,7 +31,7 @@ void CGameWorld::Init()
 	{
 		Tga2D::Vector2f position = Tga2D::Vector2f(CommonUtilities::GetRandomFloat(0, gridSize), CommonUtilities::GetRandomFloat(0, gridSize));
 		Object* object = new Object();
-		object->Init(position,Tga2D::Vector2f(40, 40));
+		object->Init(position, Tga2D::Vector2f(40, 40));
 		myObjects.Add(object);
 		myGrid->FindAnInsertObjectInTile(object, position);
 	}
@@ -40,7 +39,10 @@ void CGameWorld::Init()
 	myTga2dLogoSprite->SetPivot({ 0.5f, 0.5f });
 	myTga2dLogoSprite->SetPosition({ 0.8f, 0.5f });
 	myTga2dLogoSprite->SetSizeRelativeToScreen({ 0.2,0.2 });*/
+	myVisualZone = new VisualZone();
+	myVisualZone->Init({ 40 * 10,40 * 10 }, { 40,40 });
 	CommonUtilities::InputHandler::Instance().CheckMousePos();
+
 }
 
 
@@ -54,10 +56,10 @@ void CGameWorld::Update(float /*aTimeDelta*/)
 		ResetStartnEnd();
 		myGrid->ResetColors();
 	}
-	
+
 	if (CommonUtilities::InputHandler::Instance().CheckIfMouseButtonIsPressed(static_cast<int>(InputKeys::eMouseButtons::eLBUTTON)) && myStart == -1)
 	{
-		nodeClicked = myGrid->TileOnMousePosLeftClick(foundTile,Tga2D::CColor(0,1,0,1));
+		nodeClicked = myGrid->TileOnMousePosLeftClick(foundTile, Tga2D::CColor(0, 1, 0, 1));
 		if (foundTile)
 		{
 			myStart = nodeClicked;
@@ -73,7 +75,7 @@ void CGameWorld::Update(float /*aTimeDelta*/)
 	}
 
 	if (CommonUtilities::InputHandler::Instance().CheckIfMouseButtonIsPressed(static_cast<int>(InputKeys::eMouseButtons::eLBUTTON)) && myStart != -1 && myEnd != -1)
-	{	
+	{
 		ResetStartnEnd();
 	}
 
@@ -96,5 +98,6 @@ void CGameWorld::Render()
 		myObjects[i]->Render();
 	}
 	myGrid->Render();
+	myVisualZone->Render();
 	//myTga2dLogoSprite->Render();
 }

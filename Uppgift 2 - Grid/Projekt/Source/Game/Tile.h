@@ -18,11 +18,12 @@ public:
 	void ChangeColor(Tga2D::CColor aColor);
 	int GetIndex();
 	void AddObject(Object*aObject);
+	CommonUtilities::GrowingArray<Object*>& GetObjects();
 	void CheckIfTileIsInsideRightclick();
 	bool CheckIfTileIsInsideLeftclick(int& aIndex, const Tga2D::CColor& aColor);
 	void Render();
 private:
-	CommonUtilities::VectorOnStack<Object*,50>myContainedObjects;
+	CommonUtilities::GrowingArray<Object*>myContainedObjects;
 	
 	Tga2D::CColor myColor;
 	int myIndex;

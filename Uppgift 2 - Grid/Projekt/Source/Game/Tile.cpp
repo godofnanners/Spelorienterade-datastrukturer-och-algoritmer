@@ -28,6 +28,11 @@ void Tile::AddObject(Object* aObject)
 	myContainedObjects.Add(aObject);
 }
 
+CommonUtilities::GrowingArray<Object*>& Tile::GetObjects()
+{
+	return myContainedObjects;
+}
+
 bool Tile::CheckIfTileIsInsideLeftclick(int &aIndex,const Tga2D::CColor& aColor)
 {
 	std::array<float, 2> mouseCord = CommonUtilities::InputHandler::Instance().CheckMousePosInWindow(*Tga2D::CEngine::GetInstance()->GetHWND());

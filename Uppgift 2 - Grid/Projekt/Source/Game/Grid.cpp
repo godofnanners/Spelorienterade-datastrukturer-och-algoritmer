@@ -81,18 +81,35 @@ void Grid::FindAnInsertObjectInTile(Object* aObject, Tga2D::Vector2f myPos)
 
 CommonUtilities::GrowingArray<Object*> Grid::GetObjectsInAABB(const Rect& aRect)
 {
+	unsigned int topLeftIndex = (aRect.GetTopLeft().x * 0.025f) + (aRect.GetTopLeft().y * 0.025f) * 20;
+	unsigned int topRightIndex = (aRect.GetTopRight().x * 0.025f) + (aRect.GetTopRight().y * 0.025f) * 20;
+	unsigned int bottomLeftIndex = (aRect.GetBottomLeft().x * 0.025f) + (aRect.GetBottomLeft().y * 0.025f) * 20;
+	unsigned int bottomRightIndex = (aRect.GetBottomRight().x * 0.025f) + (aRect.GetBottomRight().y * 0.025f) * 20;
+	unsigned int size = topRightIndex - topLeftIndex;
+	CommonUtilities::GrowingArray<Object*> objectList;
 
-	unsigned int topLeftIndex= aRect.GetTopLeft().x
+	for (int column = topLeftIndex; column < topRightIndex; column++)
+	{
+		for (int row = bottomLeftIndex; row < bottomRightIndex; row++)
+		{
+			CommonUtilities::GrowingArray<Object*>ObjectsInTile = myTiles[column + (row * 20)].GetObjects();
+			for (int objectIndex = 0; objectIndex < ObjectsInTile.Size(); objectIndex++)
+			{
+				objectList.Add(ObjectsInTile[objectIndex]);
+			}
+		}
+	}
+	return objectList;
 }
 
 bool Grid::CheckColisionAABB(const Rect& aRect1, const Rect& aRect2)
 {
 
-	const CommonUtilities::Vector2<float>& pos1 = aRect1.GetPos();
-	const CommonUtilities::Vector2<float>& dim1 = aRect1.GetDimensions();
+	const Tga2D::Vector2<float>& pos1 = aRect1.GetPos();
+	const Tga2D::Vector2<float>& dim1 = aRect1.GetDimensions();
 
-	const CommonUtilities::Vector2<float>& pos2 = aRect2.GetPos();
-	const CommonUtilities::Vector2<float>& dim2 = aRect2.GetDimensions();
+	const Tga2D::Vector2<float>& pos2 = aRect2.GetPos();
+	const Tga2D::Vector2<float>& dim2 = aRect2.GetDimensions();
 
 	return (pos1.x < pos2.x + dim2.x &&
 		pos1.x + dim1.x > pos2.x &&

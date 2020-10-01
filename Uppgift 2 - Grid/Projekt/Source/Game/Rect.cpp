@@ -5,34 +5,34 @@ Rect::~Rect()
 {
 }
 
-const CommonUtilities::Vector2<float>& Rect::GetPos() const
+const Tga2D::Vector2<float>& Rect::GetPos() const
 {
 	return myPos;
 }
 
-const CommonUtilities::Vector2<float>& Rect::GetDimensions() const
+const Tga2D::Vector2<float>& Rect::GetDimensions() const
 {
-	return CommonUtilities::Vector2<float>(myWidth,myHeight);
+	return Tga2D::Vector2<float>(myWidth,myHeight);
 }
 
-const CommonUtilities::Vector2<float>& Rect::GetTopLeft() const
+const Tga2D::Vector2<float>& Rect::GetTopLeft() const
 {
-	return CommonUtilities::Vector2<float>(myPos.y - myHeight * 0.5f, myPos.x - myWidth * 0.5f);
+	return Tga2D::Vector2<float>(myPos.y - myHeight * 0.5f, myPos.x - myWidth * 0.5f);
 }
 
-const CommonUtilities::Vector2<float>& Rect::GetTopRight() const
+const Tga2D::Vector2<float>& Rect::GetTopRight() const
 {
-	return CommonUtilities::Vector2<float>(myPos.y - myHeight * 0.5f, myPos.x + myWidth * 0.5f);
+	return Tga2D::Vector2<float>(myPos.y - myHeight * 0.5f, myPos.x + myWidth * 0.5f);
 }
 
-const CommonUtilities::Vector2<float>& Rect::GetBottomLeft() const
+const Tga2D::Vector2<float>& Rect::GetBottomLeft() const
 {
-	return CommonUtilities::Vector2<float>(myPos.y + myHeight * 0.5f, myPos.x - myWidth * 0.5f);
+	return Tga2D::Vector2<float>(myPos.y + myHeight * 0.5f, myPos.x - myWidth * 0.5f);
 }
 
-const CommonUtilities::Vector2<float>& Rect::GetBottomRight() const
+const Tga2D::Vector2<float>& Rect::GetBottomRight() const
 {
-	return CommonUtilities::Vector2<float>(myPos.y + myHeight * 0.5f, myPos.x + myWidth * 0.5f);
+	return Tga2D::Vector2<float>(myPos.y + myHeight * 0.5f, myPos.x + myWidth * 0.5f);
 }
 
 const float Rect::GetLeft() const
