@@ -81,15 +81,21 @@ void Grid::FindAnInsertObjectInTile(Object* aObject, Tga2D::Vector2f myPos)
 
 CommonUtilities::GrowingArray<Object*> Grid::GetObjectsInAABB(const Rect& aRect)
 {
+
 	Tga2D::Vector2f topLeft = aRect.GetTopLeft();
 	Tga2D::Vector2f topRight = aRect.GetTopRight();
 	Tga2D::Vector2f bottomRight = aRect.GetBottomRight();
 	Tga2D::Vector2f bottomLeft = aRect.GetBottomLeft();
 
-	unsigned int topLeftIndex = (topLeft.x ) + (topLeft.y) * 20;
-	unsigned int topRightIndex = (topRight.x ) + (topRight.y ) * 20;
-	unsigned int bottomLeftIndex = (bottomLeft.x ) + (bottomLeft.y ) * 20;
-	unsigned int bottomRightIndex = (bottomRight.x ) + (bottomRight.y ) * 20;
+	topLeft *= 0.025f;
+	topRight *= 0.025f;
+	bottomRight *= 0.025f;
+	bottomLeft *= 0.025f;
+
+	unsigned int topLeftIndex = (topLeft.x) + (topLeft.y * 20);
+	unsigned int topRightIndex = (topRight.x) + (topRight.y * 20);
+	unsigned int bottomLeftIndex = (bottomLeft.x) + (bottomLeft.y * 20);
+	unsigned int bottomRightIndex = (bottomRight.x) + (bottomRight.y * 20);
 	unsigned int size = topRightIndex - topLeftIndex;
 	CommonUtilities::GrowingArray<Object*> objectList;
 

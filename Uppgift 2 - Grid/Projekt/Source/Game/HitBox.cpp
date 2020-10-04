@@ -12,7 +12,7 @@ HitBox::HitBox()
 
 void HitBox::Init(Tga2D::CSprite* aSprite)
 {
-	myWidth = aSprite->GetSize().x/Tga2D::CEngine::GetInstance()->GetWindowRatio();
+	myWidth = aSprite->GetSize().x;
 	myHeight = aSprite->GetSize().y;
 	myPos = aSprite->GetPosition();
 	myPivot = aSprite->GetPivot();
@@ -20,10 +20,10 @@ void HitBox::Init(Tga2D::CSprite* aSprite)
 
 void HitBox::Init(const Tga2D::Vector2f& aDim,const Tga2D::Vector2f& aPos)
 {
-	myWidth = aDim.x / Tga2D::CEngine::GetInstance()->GetWindowSize().myX;
-	myHeight = aDim.y/ Tga2D::CEngine::GetInstance()->GetWindowSize().myY;
-	myPos.x = aPos.x / Tga2D::CEngine::GetInstance()->GetWindowSize().x;
-	myPos.y = aPos.y / Tga2D::CEngine::GetInstance()->GetWindowSize().y;
+	myWidth = aDim.x;
+	myHeight = aDim.y;
+	myPos.x = aPos.x;
+	myPos.y = aPos.y;
 }
 
 const Tga2D::Vector2f HitBox::GetPos()
@@ -49,10 +49,13 @@ void HitBox::Update(Tga2D::Vector2f aPosition)
 
 void HitBox::DrawHitbox(Tga2D::CColor aColor) const
 {
-	Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine(Tga2D::Vector2f(myPos.x + myWidth, myPos.y + myHeight), Tga2D::Vector2f(myPos.x + myWidth, myPos.y), aColor);
-	Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine(Tga2D::Vector2f(myPos.x, myPos.y + myHeight), myPos, aColor);
-	Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine(Tga2D::Vector2f(myPos.x + myWidth, myPos.y), myPos, aColor);
-	Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine(Tga2D::Vector2f(myPos.x, myPos.y + myHeight), Tga2D::Vector2f(myPos.x + myWidth, myPos.y + myHeight), aColor);
+	Tga2D::Vector2f pos = { myPos.x / Tga2D::CEngine::GetInstance()->GetWindowSize().x, myPos.x / Tga2D::CEngine::GetInstance()->GetWindowSize().y };
+	float width=myWidth/ Tga2D::CEngine::GetInstance()->GetWindowSize().x;
+	float height = myHeight / Tga2D::CEngine::GetInstance()->GetWindowSize().y;
+	Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine(Tga2D::Vector2f(pos.x + width,pos.y + height), Tga2D::Vector2f(pos.x + width, pos.y), aColor);
+	Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine(Tga2D::Vector2f(pos.x, pos.y + height), pos, aColor);
+	Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine(Tga2D::Vector2f(pos.x + width, pos.y), pos, aColor);
+	Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine(Tga2D::Vector2f(pos.x, pos.y + height), Tga2D::Vector2f(pos.x + width, pos.y + height), aColor);
 }
 
 bool HitBox::CheckCollision(HitBox aHitbox) const

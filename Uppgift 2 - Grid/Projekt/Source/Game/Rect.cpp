@@ -23,22 +23,22 @@ const Tga2D::Vector2<float>& Rect::GetDimensions() const
 
 const Tga2D::Vector2<float> Rect::GetTopLeft() const
 {
-	return Tga2D::Vector2<float>(myPos.y - myHeight * 0.5f, myPos.x - myWidth * 0.5f);
+	return Tga2D::Vector2<float>(myPos.x - myWidth * 0.5f, myPos.y - myHeight * 0.5f);
 }
 
 const Tga2D::Vector2<float> Rect::GetTopRight() const
 {
-	return Tga2D::Vector2<float>(myPos.y - myHeight * 0.5f, myPos.x + myWidth * 0.5f);
+	return Tga2D::Vector2<float>( myPos.x + myWidth * 0.5f, myPos.y - myHeight * 0.5f);
 }
 
 const Tga2D::Vector2<float> Rect::GetBottomLeft() const
 {
-	return Tga2D::Vector2<float>(myPos.y + myHeight * 0.5f, myPos.x - myWidth * 0.5f);
+	return Tga2D::Vector2<float>(myPos.x - myWidth * 0.5f, myPos.y + myHeight * 0.5f);
 }
 
 const Tga2D::Vector2<float> Rect::GetBottomRight() const
 {
-	return Tga2D::Vector2<float>(myPos.y + myHeight * 0.5f, myPos.x + myWidth * 0.5f);
+	return Tga2D::Vector2<float>(myPos.x + myWidth * 0.5f, myPos.y + myHeight * 0.5f );
 }
 
 const float Rect::GetLeft() const
