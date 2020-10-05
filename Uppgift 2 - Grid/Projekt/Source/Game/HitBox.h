@@ -14,9 +14,10 @@ public:
 	const float GetWidth();
 	const float GetHeight();
 	void Update(Tga2D::Vector2f aPosition);
-	void DrawHitbox(Tga2D::CColor aColor) const;
+	void DrawHitbox() const;
 	bool CheckCollision(HitBox aHitbox) const;
 	bool CheckifPointIsInside(Tga2D::Vector2f aPoint) const;
+	Tga2D::CColor myColor;
 private:
 	Tga2D::Vector2f myPivot;
 };

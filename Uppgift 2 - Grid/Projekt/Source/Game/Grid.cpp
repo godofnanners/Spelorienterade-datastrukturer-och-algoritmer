@@ -96,19 +96,23 @@ CommonUtilities::GrowingArray<Object*> Grid::GetObjectsInAABB(const Rect& aRect)
 	unsigned int topRightIndex = (topRight.x) + (topRight.y * 20);
 	unsigned int bottomLeftIndex = (bottomLeft.x) + (bottomLeft.y * 20);
 	unsigned int bottomRightIndex = (bottomRight.x) + (bottomRight.y * 20);
-	unsigned int size = topRightIndex - topLeftIndex;
+	unsigned int rowSize = topRightIndex - topLeftIndex;
+	unsigned int rowIndex = topLeftIndex;
 	CommonUtilities::GrowingArray<Object*> objectList;
 
-	for (int column = topLeftIndex; column < topRightIndex; column++)
+	for (int tileIndex = topLeftIndex; tileIndex < bottomRightIndex; tileIndex++)
 	{
-		for (int row = bottomLeftIndex; row < bottomRightIndex; row++)
+		if (rowSize < tileIndex - rowIndex)
 		{
-			CommonUtilities::GrowingArray<Object*>ObjectsInTile = myTiles[column + (row * 20)].GetObjects();
-			for (int objectIndex = 0; objectIndex < ObjectsInTile.Size(); objectIndex++)
-			{
-				objectList.Add(ObjectsInTile[objectIndex]);
-			}
+			rowIndex += 20;
+			tileIndex = rowIndex;
 		}
+		CommonUtilities::GrowingArray<Object*>ObjectsInTile = myTiles[tileIndex].GetObjects();
+		for (int objectIndex = 0; objectIndex < ObjectsInTile.Size(); objectIndex++)
+		{
+			objectList.Add(ObjectsInTile[objectIndex]);
+		}
+		myTiles[tileIndex].ChangeColor({ 1, 0, 1, 1 });
 	}
 	return objectList;
 }
