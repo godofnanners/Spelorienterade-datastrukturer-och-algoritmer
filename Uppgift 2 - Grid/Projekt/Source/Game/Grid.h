@@ -17,5 +17,6 @@ public:
 	bool CheckIfPointIsInsideRect(const CommonUtilities::Vector2<float>& aPoint, const Rect& aRect);
 	void Render();
 private:
+	CommonUtilities::GrowingArray<Tile*>myTilesinVision;
 };
 

@@ -54,10 +54,10 @@ void HitBox::DrawHitbox() const
 	Tga2D::Vector2f pos = { myPos.x / Tga2D::CEngine::GetInstance()->GetWindowSize().x, myPos.y / Tga2D::CEngine::GetInstance()->GetWindowSize().y };
 	float width = myWidth / Tga2D::CEngine::GetInstance()->GetWindowSize().x;
 	float height = myHeight / Tga2D::CEngine::GetInstance()->GetWindowSize().y;
-	Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine(Tga2D::Vector2f(pos.x + width, pos.y + height), Tga2D::Vector2f(pos.x + width, pos.y), myColor);
-	Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine(Tga2D::Vector2f(pos.x, pos.y + height), pos, myColor);
-	Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine(Tga2D::Vector2f(pos.x + width, pos.y), pos, myColor);
-	Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine(Tga2D::Vector2f(pos.x, pos.y + height), Tga2D::Vector2f(pos.x + width, pos.y + height), myColor);
+	Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine(Tga2D::Vector2f(pos.x + width * 0.5f, pos.y - height * 0.5f), Tga2D::Vector2f(pos.x - width, pos.y - height * 0.5f), myColor);
+	Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine(Tga2D::Vector2f(pos.x - width * 0.5f, pos.y + height * 0.5f), Tga2D::Vector2f(pos.x - width * 0.5f, pos.y - height * 0.5f), myColor);
+	Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine(Tga2D::Vector2f(pos.x + width * 0.5f, pos.y - height * 0.5f), Tga2D::Vector2f(pos.x + width * 0.5f, pos.y + height * 0.5f), myColor);
+	Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine(Tga2D::Vector2f(pos.x - width * 0.5f, pos.y + height * 0.5f), Tga2D::Vector2f(pos.x + width, pos.y + height * 0.5f), myColor);
 }
 
 bool HitBox::CheckCollision(HitBox aHitbox) const

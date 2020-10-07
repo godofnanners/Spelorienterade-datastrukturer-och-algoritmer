@@ -99,6 +99,7 @@ CommonUtilities::GrowingArray<Object*> Grid::GetObjectsInAABB(const Rect& aRect)
 	unsigned int rowSize = topRightIndex - topLeftIndex;
 	unsigned int rowIndex = topLeftIndex;
 	CommonUtilities::GrowingArray<Object*> objectList;
+	myTilesinVision.RemoveAll();
 
 	for (int tileIndex = topLeftIndex; tileIndex < bottomRightIndex; tileIndex++)
 	{
@@ -107,6 +108,7 @@ CommonUtilities::GrowingArray<Object*> Grid::GetObjectsInAABB(const Rect& aRect)
 			rowIndex += 20;
 			tileIndex = rowIndex;
 		}
+		myTilesinVision.Add(&myTiles[tileIndex]);
 		CommonUtilities::GrowingArray<Object*>ObjectsInTile = myTiles[tileIndex].GetObjects();
 		for (int objectIndex = 0; objectIndex < ObjectsInTile.Size(); objectIndex++)
 		{
@@ -142,5 +144,10 @@ void Grid::Render()
 	for (int i = 0; i < myTiles.size(); i++)
 	{
 		myTiles[i].Render();
+	}
+
+	for (size_t i = 0; i < myTilesinVision.Size(); i++)
+	{
+		myTilesinVision[i]->Render();
 	}
 }

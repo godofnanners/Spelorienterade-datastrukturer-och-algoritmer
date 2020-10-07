@@ -106,7 +106,7 @@ void CGameWorld::Render()
 	{
 		myObjects[i]->Render();
 	}
-	myGrid->Render();
 	myVisualZone->Render();
+	myGrid->Render();
 	//myTga2dLogoSprite->Render();
 }
