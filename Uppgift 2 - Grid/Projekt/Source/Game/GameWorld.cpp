@@ -60,38 +60,7 @@ void CGameWorld::Update(float /*aTimeDelta*/)
 	//if (CommonUtilities::InputHandler::Instance().CheckIfMouseButtonIsPressed(static_cast<int>(InputKeys::eMouseButtons::eLBUTTON)))
 	int nodeClicked = -1;
 	bool foundTile = false;
-	if (CommonUtilities::InputHandler::Instance().CheckIfMouseButtonIsPressed(static_cast<int>(InputKeys::eMouseButtons::eLBUTTON)) && myStart < 0 && myEnd < 0)
-	{
-		ResetStartnEnd();
-		myGrid->ResetColors();
-	}
-
-	if (CommonUtilities::InputHandler::Instance().CheckIfMouseButtonIsPressed(static_cast<int>(InputKeys::eMouseButtons::eLBUTTON)) && myStart == -1)
-	{
-		nodeClicked = myGrid->TileOnMousePosLeftClick(foundTile, Tga2D::CColor(0, 1, 0, 1));
-		if (foundTile)
-		{
-			myStart = nodeClicked;
-		}
-	}
-	else if (CommonUtilities::InputHandler::Instance().CheckIfMouseButtonIsPressed(static_cast<int>(InputKeys::eMouseButtons::eLBUTTON)) && myEnd == -1)
-	{
-		nodeClicked = myGrid->TileOnMousePosLeftClick(foundTile, Tga2D::CColor(1, 0, 0, 1));
-		if (foundTile)
-		{
-			myEnd = nodeClicked;
-		}
-	}
-
-	if (CommonUtilities::InputHandler::Instance().CheckIfMouseButtonIsPressed(static_cast<int>(InputKeys::eMouseButtons::eLBUTTON)) && myStart != -1 && myEnd != -1)
-	{
-		ResetStartnEnd();
-	}
-
-	if (CommonUtilities::InputHandler::Instance().CheckIfMouseButtonIsPressed(static_cast<int>(InputKeys::eMouseButtons::eRBUTTON)))
-	{
-		myGrid->TileOnMousePosRightClick();
-	}
+	
 }
 
 void CGameWorld::ResetStartnEnd()

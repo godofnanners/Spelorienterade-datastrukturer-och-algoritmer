@@ -87,21 +87,25 @@ CommonUtilities::GrowingArray<Object*> Grid::GetObjectsInAABB(const Rect& aRect)
 	Tga2D::Vector2f bottomRight = aRect.GetBottomRight();
 	Tga2D::Vector2f bottomLeft = aRect.GetBottomLeft();
 
-	topLeft *= 0.025f;
-	topRight *= 0.025f;
-	bottomRight *= 0.025f;
-	bottomLeft *= 0.025f;
+	unsigned int topleftColumn=topLeft.x * 0.025f;
+	unsigned int topleftRow= topLeft.y * 0.025f;
+	unsigned int toprightColumn = topRight.x * 0.025f;
+	unsigned int toprightRow = topRight.y * 0.025f;
+	unsigned int bottomRightColumn = bottomRight.x * 0.025f;
+	unsigned int bottomRightRow = bottomRight.y * 0.025f;
+	//unsigned int bottomleftColumn = bottomLeft.x * 0.025f;
+	//unsigned int bottomleftRow = bottomLeft.y * 0.025f;
 
-	unsigned int topLeftIndex = (topLeft.x) + (topLeft.y * 20);
-	unsigned int topRightIndex = (topRight.x) + (topRight.y * 20);
-	unsigned int bottomLeftIndex = (bottomLeft.x) + (bottomLeft.y * 20);
-	unsigned int bottomRightIndex = (bottomRight.x) + (bottomRight.y * 20);
+	unsigned int topLeftIndex = (topleftColumn) + (topleftRow * 20);
+	unsigned int topRightIndex = (toprightColumn) + (toprightRow * 20);
+	//unsigned int bottomLeftIndex = (bottomleftColumn) + (bottomleftRow * 20);
+	unsigned int bottomRightIndex = (bottomRightColumn) + (bottomRightRow * 20);
 	unsigned int rowSize = topRightIndex - topLeftIndex;
 	unsigned int rowIndex = topLeftIndex;
 	CommonUtilities::GrowingArray<Object*> objectList;
 	myTilesinVision.RemoveAll();
 
-	for (int tileIndex = topLeftIndex; tileIndex < bottomRightIndex; tileIndex++)
+	for (int tileIndex = topLeftIndex; tileIndex < bottomRightIndex+1; tileIndex++)
 	{
 		if (rowSize < tileIndex - rowIndex)
 		{
