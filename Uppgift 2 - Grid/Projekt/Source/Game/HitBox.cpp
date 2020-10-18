@@ -62,10 +62,10 @@ void HitBox::DrawHitbox() const
 
 bool HitBox::CheckCollision(HitBox aHitbox) const
 {
-	if (myPos.x<aHitbox.GetPos().x + (aHitbox.GetWidth()) &&
-		myPos.x + myWidth > aHitbox.GetPos().x &&
-		myPos.y < aHitbox.GetPos().y + (aHitbox.GetHeight()) &&
-		myPos.y + (myHeight) > aHitbox.GetPos().y)
+	if (myPos.x - myWidth * 0.5f < aHitbox.GetPos().x + (aHitbox.GetWidth() * 0.5f) &&
+		myPos.x + myWidth * 0.5f > aHitbox.GetPos().x - (aHitbox.GetWidth() * 0.5f) &&
+		myPos.y - myHeight * 0.5f < aHitbox.GetPos().y + (aHitbox.GetHeight() * 0.5f) &&
+		myPos.y + (myHeight * 0.5f) > aHitbox.GetPos().y - (aHitbox.GetHeight() * 0.5f))
 	{
 		return true;
 	}
@@ -74,7 +74,7 @@ bool HitBox::CheckCollision(HitBox aHitbox) const
 
 bool HitBox::CheckifPointIsInside(Tga2D::Vector2f aPoint) const
 {
-	if (aPoint.x > myPos.x && aPoint.x < myPos.x + myWidth && aPoint.y > myPos.y && aPoint.y < myPos.y + myHeight)
+	if (aPoint.x > myPos.x - myWidth * 0.5f && aPoint.x < myPos.x + myWidth * 0.5f && aPoint.y > myPos.y - myHeight * 0.5f && aPoint.y < myPos.y + myHeight * 0.5f)
 	{
 		return true;
 	}

@@ -5,6 +5,9 @@ namespace Tga2D
 	class CSprite;
 	class FBXModel;
 	class CAudio;
+	template <class Type>
+	class Vector2;
+	typedef Vector2<float> Vector2f;
 }
 class Object;
 class Grid;
@@ -16,6 +19,8 @@ public:
 	~CGameWorld();
 
 	void Init();
+	void Reset();
+	void SetMyVisualZone(const Tga2D::Vector2f& aPos);
 	void Update(float aTimeDelta);
 	void ResetStartnEnd();
 

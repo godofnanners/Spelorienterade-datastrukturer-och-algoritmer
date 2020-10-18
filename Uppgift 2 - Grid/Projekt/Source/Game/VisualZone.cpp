@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "VisualZone.h"
 #include "tga2d/sprite/sprite.h"
+#include <limits> // for infinity
 
 VisualZone::VisualZone()
 {
@@ -10,7 +11,7 @@ VisualZone::VisualZone()
 void VisualZone::Init(const Tga2D::Vector2f& aPos, const Tga2D::Vector2f& aDim)
 {
 	myPosition = aPos;
-	myHitBox.Init({ 40 * 10,40 * 10 }, aPos);
+	myHitBox.Init({ 60 * 10,60 * 10 }, aPos);
 	mySprite = new Tga2D::CSprite("Sprites/Circle.dds");
 	mySprite->SetColor({ 1,0,1,1 });
 	mySprite->SetPivot({ 0.5f,0.5f });
@@ -33,3 +34,4 @@ void VisualZone::Render()
 	mySprite->Render();
 	Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawCircle({ myPosition.x / Tga2D::CEngine::GetInstance()->GetWindowSize().myX,myPosition.y / Tga2D::CEngine::GetInstance()->GetWindowSize().myY }, myHitBox.GetWidth() / Tga2D::CEngine::GetInstance()->GetWindowSize().x * 0.5f);
 }
+
