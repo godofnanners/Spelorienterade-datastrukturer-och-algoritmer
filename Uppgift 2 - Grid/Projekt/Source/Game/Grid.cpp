@@ -69,12 +69,9 @@ CommonUtilities::GrowingArray<Object*> Grid::GetObjectsInAABB(const Rect& aRect)
 	int toprightRow = topRight.y * 0.025f;
 	int bottomRightColumn = bottomRight.x * 0.025f;
 	int bottomRightRow = bottomRight.y * 0.025f;
-	//unsigned int bottomleftColumn = bottomLeft.x * 0.025f;
-	//unsigned int bottomleftRow = bottomLeft.y * 0.025f;
 
 	int topLeftIndex = (topleftColumn)+(topleftRow * 20);
 	int topRightIndex = (toprightColumn)+(toprightRow * 20);
-	//unsigned int bottomLeftIndex = (bottomleftColumn) + (bottomleftRow * 20);
 	int bottomRightIndex = (bottomRightColumn)+(bottomRightRow * 20);
 	int rowSize = topRightIndex - topLeftIndex;
 	int rowIndex = topLeftIndex;
@@ -133,9 +130,6 @@ void Grid::Render()
 	{
 		myTiles[i].Render();
 	}
-
-	
-
 }
 
 bool Grid::raytrace(double x0, double y0, double x1, double y1, Object* aStartingObject)
@@ -155,12 +149,12 @@ bool Grid::raytrace(double x0, double y0, double x1, double y1, Object* aStartin
 	{
 		int amountOfObjectsInTile = GetTileFromPos({ (float)x, (float)y }).GetObjects().Size();
 		CommonUtilities::GrowingArray<Object*>objects = GetTileFromPos({ (float)x, (float)y }).GetObjects();
-		
-		if (IsTileContainingNonstartingObjects(x,y,aStartingObject))
+
+		if (IsTileContainingNonstartingObjects(x, y, aStartingObject))
 		{
 			for (size_t i = 0; i < amountOfObjectsInTile; i++)
 			{
-				if (objects[i]->GetHitbox().CheckifPointIsInside({ (float)x, (float)y }))
+				if (objects[i]->GetHitbox().CheckifPointIsInside({ (float)x, (float)y }) && aStartingObject != objects[i])
 				{
 					return true;
 				}
@@ -181,11 +175,11 @@ bool Grid::raytrace(double x0, double y0, double x1, double y1, Object* aStartin
 	return false;
 }
 
-bool Grid::IsTileContainingNonstartingObjects(float x, float y,Object* aStartingObject)
+bool Grid::IsTileContainingNonstartingObjects(float x, float y, Object* aStartingObject)
 {
 	CommonUtilities::GrowingArray<Object*>objects = GetTileFromPos({ (float)x, (float)y }).GetObjects();
 	int amountOfObjectsInTile = objects.Size();
-	
+
 	if (amountOfObjectsInTile > 1)
 	{
 		return true;
@@ -194,6 +188,6 @@ bool Grid::IsTileContainingNonstartingObjects(float x, float y,Object* aStarting
 	{
 		return true;
 	}
-	
+
 	return false;
 }

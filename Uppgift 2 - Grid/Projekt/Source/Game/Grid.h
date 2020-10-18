@@ -8,8 +8,6 @@ class Grid
 public:
 	void Init();
 	std::array<Tile,20*20>myTiles;
-	void TileOnMousePosRightClick();
-	int TileOnMousePosLeftClick(bool& aFoundTile, const Tga2D::CColor& aColor);
 	void ResetColors();
 	void FindAnInsertObjectInTile(Object* aObject, Tga2D::Vector2f myPos);
 	Tile& GetTileFromPos(const Tga2D::Vector2f& aPos);
