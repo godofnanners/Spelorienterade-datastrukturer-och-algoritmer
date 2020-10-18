@@ -62,10 +62,10 @@ void HitBox::DrawHitbox() const
 
 bool HitBox::CheckCollision(HitBox aHitbox) const
 {
-	if (myPos.x - myWidth * 0.5f < aHitbox.GetPos().x + (aHitbox.GetWidth() * 0.5f) &&
-		myPos.x + myWidth * 0.5f > aHitbox.GetPos().x - (aHitbox.GetWidth() * 0.5f) &&
-		myPos.y - myHeight * 0.5f < aHitbox.GetPos().y + (aHitbox.GetHeight() * 0.5f) &&
-		myPos.y + (myHeight * 0.5f) > aHitbox.GetPos().y - (aHitbox.GetHeight() * 0.5f))
+	if (myPos.x - myWidth * 0.5f < aHitbox.GetPos().x + aHitbox.GetWidth() * 0.5f &&
+		myPos.x + myWidth * 0.5f > aHitbox.GetPos().x - aHitbox.GetWidth() * 0.5f &&
+		myPos.y - myHeight * 0.5f < aHitbox.GetPos().y + aHitbox.GetHeight() * 0.5f &&
+		myPos.y + myHeight * 0.5f > aHitbox.GetPos().y - aHitbox.GetHeight() * 0.5f)
 	{
 		return true;
 	}

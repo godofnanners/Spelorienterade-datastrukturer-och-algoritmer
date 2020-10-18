@@ -30,9 +30,9 @@ void CGameWorld::Init()
 	myStart = -1;
 	myEnd = -1;
 	float gridSize = 40 * 20;
+	CommonUtilities::GrowingArray<Object*> createdObjects;
 	for (size_t i = 0; i < 15; i++)
 	{
-		CommonUtilities::GrowingArray<Object*> createdObjects;
 		Tga2D::Vector2f position = Tga2D::Vector2f(CommonUtilities::GetRandomFloat(0+20, gridSize-20), CommonUtilities::GetRandomFloat(0+20, gridSize-20));
 		Object* object = new Object();
 		object->Init(position, Tga2D::Vector2f(40, 40));
@@ -40,13 +40,13 @@ void CGameWorld::Init()
 		myObjects.Add(object);
 		myGrid->FindAnInsertObjectInTile(object, position);
 		
-		for (size_t i = 0; i < createdObjects.Size(); i++)
+		for (size_t j = 0; j < createdObjects.Size(); j++)
 		{
-			if (createdObjects[i]->GetHitbox().CheckCollision(object->GetHitbox()))
+			if (createdObjects[j]->GetHitbox().CheckCollision(object->GetHitbox()))
 			{
 				Tga2D::Vector2f newPosition = Tga2D::Vector2f(CommonUtilities::GetRandomFloat(0 + 20, gridSize - 20), CommonUtilities::GetRandomFloat(0 + 20, gridSize - 20));
 				object->SetPos(newPosition);
-				i--;
+				j--;
 			}
 		}
 		createdObjects.Add(object);
