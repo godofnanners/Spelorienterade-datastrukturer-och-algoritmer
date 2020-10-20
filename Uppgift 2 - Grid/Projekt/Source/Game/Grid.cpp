@@ -22,19 +22,6 @@ void Grid::Init()
 	}
 }
 
-
-
-void Grid::ResetColors()
-{
-	for (size_t i = 0; i < myTiles.size(); i++)
-	{
-		if (myTiles[i].myPassable)
-		{
-			myTiles[i].ChangeColor(Tga2D::CColor(1, 1, 1, 1));
-		}
-	}
-}
-
 void Grid::FindAnInsertObjectInTile(Object* aObject, Tga2D::Vector2f aPos)
 {
 	const HitBox& hitbox = aObject->GetHitbox();
@@ -64,11 +51,28 @@ CommonUtilities::GrowingArray<Object*> Grid::GetObjectsInAABB(const Rect& aRect)
 	Tga2D::Vector2f bottomLeft = aRect.GetBottomLeft();
 
 	int topleftColumn = topLeft.x * 0.025f;
+	topleftColumn= topleftColumn > 0 ? topleftColumn : 0;
+	topleftColumn = topleftColumn < 20 ? topleftColumn : 20;
+
 	int topleftRow = topLeft.y * 0.025f;
+	topleftRow = topleftRow > 0 ? topleftRow : 0;
+	topleftRow = topleftRow < 19 ? topleftRow : 19;
+
 	int toprightColumn = topRight.x * 0.025f;
+	toprightColumn = toprightColumn > 0 ? toprightColumn : 0;
+	toprightColumn = toprightColumn < 19 ? toprightColumn : 19;
+	
 	int toprightRow = topRight.y * 0.025f;
+	toprightRow = toprightRow > 0 ? toprightRow : 0;
+	toprightRow = toprightRow < 19 ? toprightRow : 19;
+	
 	int bottomRightColumn = bottomRight.x * 0.025f;
+	bottomRightColumn = bottomRightColumn > 0 ? bottomRightColumn : 0;
+	bottomRightColumn = bottomRightColumn < 19 ? bottomRightColumn : 19;
+
 	int bottomRightRow = bottomRight.y * 0.025f;
+	bottomRightRow = bottomRightRow > 0 ? bottomRightRow : 0;
+	bottomRightRow = bottomRightRow < 19 ? bottomRightRow : 19;
 
 	int topLeftIndex = (topleftColumn)+(topleftRow * 20);
 	int topRightIndex = (toprightColumn)+(toprightRow * 20);
@@ -102,21 +106,6 @@ CommonUtilities::GrowingArray<Object*> Grid::GetObjectsInAABB(const Rect& aRect)
 		myTiles[tileIndex].ChangeColor({ 1, 0, 1, 1 });
 	}
 	return objectList;
-}
-
-bool Grid::CheckColisionAABB(const Rect& aRect1, const Rect& aRect2)
-{
-
-	const Tga2D::Vector2<float>& pos1 = aRect1.GetPos();
-	const Tga2D::Vector2<float>& dim1 = aRect1.GetDimensions();
-
-	const Tga2D::Vector2<float>& pos2 = aRect2.GetPos();
-	const Tga2D::Vector2<float>& dim2 = aRect2.GetDimensions();
-
-	return (pos1.x < pos2.x + dim2.x &&
-		pos1.x + dim1.x > pos2.x &&
-		pos1.y < pos2.y + dim2.y &&
-		pos1.y + dim1.y > pos2.y);
 }
 
 bool Grid::CheckIfPointIsInsideRect(const CommonUtilities::Vector2<float>& aPoint, const Rect& aRect)
@@ -184,7 +173,7 @@ bool Grid::IsTileContainingNonstartingObjects(float x, float y, Object* aStartin
 	{
 		return true;
 	}
-	else if (amountOfObjectsInTile > 0 && objects[0] != aStartingObject)
+	else if (amountOfObjectsInTile == 1 && objects[0] != aStartingObject)
 	{
 		return true;
 	}

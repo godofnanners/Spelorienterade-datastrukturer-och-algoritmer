@@ -38,17 +38,16 @@ void CGameWorld::Init()
 		object->Init(position, Tga2D::Vector2f(40, 40));
 		object->SetAlpha(0.5f);
 		myObjects.Add(object);
-		myGrid->FindAnInsertObjectInTile(object, position);
 		
 		for (size_t j = 0; j < createdObjects.Size(); j++)
 		{
-			if (createdObjects[j]->GetHitbox().CheckCollision(object->GetHitbox()))
+			while (createdObjects[j]->GetHitbox().CheckCollision(object->GetHitbox()))
 			{
 				Tga2D::Vector2f newPosition = Tga2D::Vector2f(CommonUtilities::GetRandomFloat(0 + 20, gridSize - 20), CommonUtilities::GetRandomFloat(0 + 20, gridSize - 20));
 				object->SetPos(newPosition);
-				j--;
 			}
 		}
+		myGrid->FindAnInsertObjectInTile(object, position);
 		createdObjects.Add(object);
 	}
 	
@@ -88,7 +87,7 @@ void CGameWorld::SetMyVisualZone(const Tga2D::Vector2f& aPos)
 	{
 		Tga2D::Vector2f centerPos = myVisualZone->GetPos();
 		Tga2D::Vector2f objectPos = myInZoneObjects[i]->GetPos();
-		if ((CommonUtilities::Vector2(centerPos.x,centerPos.y)- CommonUtilities::Vector2(objectPos.x, objectPos.y)).Length()<300)
+		if ((CommonUtilities::Vector2(centerPos.x,centerPos.y)- CommonUtilities::Vector2(objectPos.x, objectPos.y)).Length()<320)
 		{
 			myInZoneObjects[i]->SetAlpha(1);
 			if (myGrid->raytrace(centerPos.x, centerPos.y, objectPos.x, objectPos.y, myInZoneObjects[i]))
@@ -98,8 +97,8 @@ void CGameWorld::SetMyVisualZone(const Tga2D::Vector2f& aPos)
 		}
 		else
 		{
-			myInZoneObjects.RemoveCyclicAtIndex(i);
-			i--;
+			//myInZoneObjects.RemoveCyclicAtIndex(i);
+			//i--;
 		}
 
 	}
